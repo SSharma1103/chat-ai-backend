@@ -48,7 +48,7 @@ router.post("/send", async (req, res) => {
     // Modify the prompt to include the chat title and the last 3 messages for context
     const styledPrompt = `
       Pretend you "${title}". 
-      Respond in his style, tone, and personality. Do not mention you are pretending. Make the experience as human-like as possible.
+      Respond in his style, tone, and personality. Do not mention you are pretending. Make the experience as human-like as possible.take care of the number of words you use , make it belivable and human-like.
       
       Here is the conversation so far:
       ${context}
