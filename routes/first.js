@@ -2,16 +2,16 @@ const express = require("express");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const router = express.Router();
 const { PreviousChat, User } = require("../schema/schema");
-const { authenticateJwt } = require("../middleware/auth"); // 👈 Import your auth middleware
+const { authenticateJwt } = require("../middleware/auth"); 
 require("dotenv").config();
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
-// Initialize the GoogleGenerativeAI client
+
 const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-// ✅ Protect this route with authenticateJwt
+
 router.post("/send", authenticateJwt, async (req, res) => {
   const { chatId, userPrompt, title } = req.body;
 
@@ -20,7 +20,7 @@ router.post("/send", authenticateJwt, async (req, res) => {
   }
 
   try {
-    console.log("Received request from user:", req.user.username); // 👈 now you have access to the user info from token
+    console.log("Received request from user:", req.user.username); 
     console.log("Prompt:", userPrompt);
 
     const chat = await PreviousChat.findById(chatId);

@@ -18,11 +18,12 @@ mongoose.connect("mongodb+srv://shivamsharma11032009:Shivamking11@cluster0.gzrm1
 .then(() => console.log("MongoDB connected"))
 .catch((err) => console.error("MongoDB connection error:", err));
 
+// API routes
 app.use("/first", firstRouter);
 app.use("/user", userRouter);
 
-// Use PORT from environment or default to 3000
-const PORT =  3000;
+// Use PORT from .env or fallback to 3000
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
 });

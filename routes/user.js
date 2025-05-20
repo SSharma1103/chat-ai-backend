@@ -2,12 +2,12 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { User, PreviousChat } = require("../schema/schema");
-const { authenticateJwt } = require("../middleware/auth"); // ✅ import JWT middleware
+const { authenticateJwt } = require("../middleware/auth"); 
 require("dotenv").config();
 
 const router = express.Router();
 
-// POST /user/register
+
 router.post("/register", async (req, res) => {
   const { username, email, password } = req.body;
 
@@ -32,7 +32,7 @@ router.post("/register", async (req, res) => {
 
     await newUser.save();
 
-    // ✅ After successful registration, automatically create a JWT and send it back
+    
     const token = jwt.sign(
       { userId: newUser._id },
       process.env.JWT_SECRET,
@@ -52,7 +52,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
-// POST /user/login
+
 router.post("/login", async (req, res) => {
   const { emailOrUsername, password } = req.body;
 
@@ -93,10 +93,10 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// POST /user/create-chat (✅ protected)
+
 router.post("/create", authenticateJwt, async (req, res) => {
-  const { title } = req.body; // 👈 only need title now
-  const userId = req.user.userId; // 👈 get from JWT token
+  const { title } = req.body; 
+  const userId = req.user.userId; 
 
   if (!userId) {
     return res.status(400).json({ message: "Invalid token: userId missing" });
