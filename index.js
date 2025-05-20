@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 // Connect to MongoDB using environment variable
-mongoose.connect("mongodb+srv://shivamsharma11032009:Shivamking11@cluster0.gzrm1.mongodb.net/Talk", {
+mongoose.connect(process.env.MONGO_URI, {
   dbName: "Talk",
 })
 .then(() => console.log("MongoDB connected"))
@@ -23,7 +23,7 @@ app.use("/first", firstRouter);
 app.use("/user", userRouter);
 
 // Use PORT from .env or fallback to 3000
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 3003;
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
 });
